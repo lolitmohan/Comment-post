@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .container{
+        width: 900px;
+        margin: auto;
+        background: green;
+        padding: 50px;
+    }
+    #post{
+        margin-top: 10px;
+        border-radius: 5px;
+        padding: 5px;
+        border: none;
+        cursor: pointer;
+    }
+    .newComment{
+        border:2px solid yellow;
+        margin-top: 15px;
+    }
+    .delete{
+        cursor: pointer;
+    }
+</style>
+<body>
+    <section class="commentSection">
+
+        <div class="container">
+            <h1>Comment About js</h1>
+            <div class="commentBox">
+                <textarea name="commentBox" id="comment" cols="30" rows="10"></textarea>
+            </div>
+            <button id="post">Post Comment</button>
+            <div id="commentBox">
+
+            </div>
+        </div>
+
+
+        
+
+    </section>
+
+
+    <script>
+        let comment = document.getElementById("comment");
+        let commentBox = document.getElementById("commentBox");
+        let post = document.getElementById("post");
+
+        post.addEventListener("click", function(){
+
+            if(comment.value == " "){
+                alert("Please fill out the filed in the form");
+                comment.style.border= "red";
+            }else{
+            
+                let newComment = document.createElement("div");
+                newComment.classList.add("newComment");
+                commentBox.appendChild(newComment);
+
+                let newElement = document.createElement("p");
+                newElement.innerText = comment.value;
+                newComment.appendChild(newElement);
+
+                let deleteBtn = document.createElement("button");
+                deleteBtn.innerText = "Delete Comment";
+                deleteBtn.classList.add("delete");
+                newComment.appendChild(deleteBtn);
+
+                let deletePost = document.querySelectorAll(".delete");
+                for(let btn of deletePost){
+                    btn.addEventListener("click", function(event){
+                        event.target.parentElement.remove();
+                    })
+                }
+                comment.value = " ";
+
+            }
+        })
+
+    </script>
+</body>
+</html>
